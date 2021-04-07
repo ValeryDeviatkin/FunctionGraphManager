@@ -1,17 +1,19 @@
 ﻿using System.Windows;
+using Common.Interfaces;
 using Unity;
-using ViewModels.Main;
-using Wpf.Tools;
 
 namespace FunctionGraphManager
 {
-    internal static class ClientAppManager
+    internal class ClientAppManager : IClientAppManager
     {
-        private static readonly IUnityContainer Container = ServiceLocator.Container;
-
-        public static void SetMainViewModel()
+        public ClientAppManager(IUnityContainer container)
         {
-            Application.Current.MainWindow.DataContext = Container.Resolve<MainViewModel>();
+            container.RegisterInstance(this);
+        }
+
+        public void ExitApp()
+        {
+            Application.Current.Shutdown();
         }
     }
 }

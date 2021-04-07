@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Startup", "Startup", "{FDEB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf.Tools", "Wpf.Tools\Wpf.Tools.csproj", "{F3B8943A-CC9E-4604-91A4-C249D733FEB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{805783C1-60DF-4A61-BDA7-9BB1765FE4CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTransfer", "DataTransfer\DataTransfer.csproj", "{1550D1F5-A405-4809-8847-FEE3B0ABD38A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{F3B8943A-CC9E-4604-91A4-C249D733FEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3B8943A-CC9E-4604-91A4-C249D733FEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3B8943A-CC9E-4604-91A4-C249D733FEB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805783C1-60DF-4A61-BDA7-9BB1765FE4CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805783C1-60DF-4A61-BDA7-9BB1765FE4CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805783C1-60DF-4A61-BDA7-9BB1765FE4CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805783C1-60DF-4A61-BDA7-9BB1765FE4CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1550D1F5-A405-4809-8847-FEE3B0ABD38A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1550D1F5-A405-4809-8847-FEE3B0ABD38A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1550D1F5-A405-4809-8847-FEE3B0ABD38A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1550D1F5-A405-4809-8847-FEE3B0ABD38A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 ﻿using Common.Interfaces;
 using Unity;
 using ViewModels.Main;
+using ViewModels.Services;
 
 namespace ViewModels
 {
@@ -9,7 +10,12 @@ namespace ViewModels
         public void Initialize(IUnityContainer container)
         {
             container
+
+                // ViewModels
                .RegisterType<MainViewModel>()
+
+                // Services
+               .RegisterType<IAppLifecycleService, AppLifecycleService>()
                 ;
         }
 

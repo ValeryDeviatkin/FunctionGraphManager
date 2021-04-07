@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Base\CommandBase.cs" />
     <Compile Include="Base\ObservableObject.cs" />
+    <Compile Include="Base\ViewModelBase.cs" />
     <Compile Include="Helpers\ExceptionLogHelper.cs" />
     <Compile Include="ServiceLocator.cs" />
   </ItemGroup>
