@@ -8,6 +8,7 @@
              xmlns:b = "http://schemas.microsoft.com/xaml/behaviors"
              xmlns:behaviors = "clr-namespace:FunctionGraphManager.Behaviors"
              xmlns:componentModel = "clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:controls = "clr-namespace:FunctionGraphManager.Views.Controls"
              mc:Ignorable = "d"
              Background = "Transparent"
              x:Name = "Root">
@@ -26,58 +27,94 @@
         </CollectionViewSource>
     </Control.Resources>
 
-    <ListBox ItemsSource = "{Binding Source={StaticResource PointViewSource}, Mode=OneTime}"
-             SelectedItem = "{Binding SelectedPoint, Mode=TwoWay}"
-             BorderThickness = "0">
+    <Grid>
+        <ItemsControl ItemsSource = "{Binding ElementName=Root, Path=Lines, Mode=OneTime}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas ClipToBounds = "True" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType = "controls:GraphLineViewModel">
+                    <Line X1 = "{Binding Start.X, Mode=OneWay}"
+                          X2 = "{Binding End.X, Mode=OneWay}"
+                          Y1 = "{Binding Start.Y}"
+                          Y2 = "{Binding End.Y}"
+                          StrokeThickness = "{StaticResource BorderThicknessSize}"
+                          Stroke = "{Binding ElementName=Root, Path=DataContext.Id, Converter={converters:GuidToBrushConverter}}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <Canvas ClipToBounds = "True"
-                        Background = "Transparent" />
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
+        <ListBox x:Name = "PointList"
+                 ItemsSource = "{Binding Source={StaticResource PointViewSource}, Mode=OneTime}"
+                 SelectedItem = "{Binding SelectedPoint, Mode=TwoWay}"
+                 BorderThickness = "0">
 
-        <ListBox.ItemContainerStyle>
-            <Style TargetType = "ListBoxItem">
-                <Setter Property = "ToolTip"
-                        Value = "{Binding ElementName=Root, Path=DataContext.Name, Mode=OneWay}" />
-                <Setter Property = "Cursor"
-                        Value = "Hand" />
-                <Setter Property = "Canvas.Top"
-                        Value = "{Binding Y, Mode=OneWay}" />
-                <Setter Property = "Canvas.Left"
-                        Value = "{Binding X, Mode=OneWay}" />
-                <Setter Property = "Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType = "ListBoxItem">
-                            <Border x:Name = "Border"
-                                    Background = "{Binding ElementName=Root, Path=DataContext.Id, Converter={converters:GuidToBrushConverter}}"
-                                    CornerRadius = "5"
-                                    Width = "10"
-                                    Height = "10">
-                                <b:Interaction.Behaviors>
-                                    <behaviors:CanvasDragNDropBehavior Point = "{Binding Mode=OneTime}"
-                                                                       Canvas = "{Binding RelativeSource={RelativeSource AncestorType=Canvas}, Mode=OneTime}" />
-                                </b:Interaction.Behaviors>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property = "IsSelected"
-                                         Value = "False">
-                                    <Setter TargetName = "Border"
-                                            Property = "BorderThickness"
-                                            Value = "0" />
-                                    <Setter TargetName = "Border"
-                                            Property = "Width"
-                                            Value = "8" />
-                                    <Setter TargetName = "Border"
-                                            Property = "Height"
-                                            Value = "8" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ListBox.ItemContainerStyle>
-    </ListBox>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas x:Name = "Canvas"
+                            ClipToBounds = "True"
+                            Background = "Transparent" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType = "ListBoxItem">
+                    <Setter Property = "ToolTip"
+                            Value = "{Binding ElementName=Root, Path=DataContext.Name, Mode=OneWay}" />
+                    <Setter Property = "Cursor"
+                            Value = "Hand" />
+                    <Setter Property = "Canvas.Top">
+                        <Setter.Value>
+                            <MultiBinding Converter = "{converters:OffsetCanvasPositionConverter}">
+                                <Binding Path = "Y" />
+                                <Binding RelativeSource = "{RelativeSource Self}"
+                                         Path = "ActualHeight" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property = "Canvas.Left">
+                        <Setter.Value>
+                            <MultiBinding Converter = "{converters:OffsetCanvasPositionConverter}">
+                                <Binding Path = "X" />
+                                <Binding RelativeSource = "{RelativeSource Self}"
+                                         Path = "ActualWidth" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property = "Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType = "ListBoxItem">
+                                <Border x:Name = "Border"
+                                        Background = "{Binding ElementName=Root, Path=DataContext.Id, Converter={converters:GuidToBrushConverter}}"
+                                        CornerRadius = "5"
+                                        Width = "10"
+                                        Height = "10">
+                                    <b:Interaction.Behaviors>
+                                        <behaviors:CanvasDragNDropBehavior Point = "{Binding Mode=OneTime}"
+                                                                           Canvas = "{Binding ElementName=Canvas, Mode=OneTime}" />
+                                    </b:Interaction.Behaviors>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property = "IsSelected"
+                                             Value = "False">
+                                        <Setter TargetName = "Border"
+                                                Property = "BorderThickness"
+                                                Value = "0" />
+                                        <Setter TargetName = "Border"
+                                                Property = "Width"
+                                                Value = "8" />
+                                        <Setter TargetName = "Border"
+                                                Property = "Height"
+                                                Value = "8" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
 </UserControl>

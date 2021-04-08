@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace Wpf.Tools.Helpers
 {
@@ -10,11 +11,11 @@ namespace Wpf.Tools.Helpers
         {
             var exceptionSource = $"{raiser.GetType().Name}.{method}";
 
-            #if DEBUG
+#if DEBUG
             Debug.Fail(exceptionSource, e.Message);
-            #else
+#else
             MessageBox.Show(e.Message, exceptionSource, MessageBoxButton.OK, MessageBoxImage.Error);
-            #endif
+#endif
         }
     }
 }

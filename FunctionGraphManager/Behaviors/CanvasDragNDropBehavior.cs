@@ -23,18 +23,25 @@ namespace FunctionGraphManager.Behaviors
         {
             base.OnDetaching();
 
-            _isDragDropping = false;
+            if (Canvas != null)
+            {
+                Canvas.MouseLeave -= CanvasOnMouseLeave;
+                Canvas.MouseLeftButtonUp -= CanvasOnMouseLeftButtonUp;
+            }
 
             AssociatedObject.Loaded -= AssociatedObjectOnLoaded;
             AssociatedObject.MouseLeftButtonDown -= AssociatedObjectOnMouseLeftButtonDown;
-            Canvas.MouseLeave -= CanvasOnMouseLeave;
-            Canvas.MouseLeftButtonUp -= CanvasOnMouseLeftButtonUp;
+
+            _isDragDropping = false;
         }
 
         private void AssociatedObjectOnLoaded(object sender, RoutedEventArgs e)
         {
-            Canvas.MouseLeave += CanvasOnMouseLeave;
-            Canvas.MouseLeftButtonUp += CanvasOnMouseLeftButtonUp;
+            if (Canvas != null)
+            {
+                Canvas.MouseLeave += CanvasOnMouseLeave;
+                Canvas.MouseLeftButtonUp += CanvasOnMouseLeftButtonUp;
+            }
         }
 
         private void CanvasOnMouseLeave(object sender, MouseEventArgs e)

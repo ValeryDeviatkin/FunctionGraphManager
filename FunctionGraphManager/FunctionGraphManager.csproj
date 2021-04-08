@@ -88,6 +88,8 @@
     <Compile Include="Behaviors\CanvasDragNDropBehavior.cs" />
     <Compile Include="Behaviors\CollectionViewSourceSortRefreshBehavior.cs" />
     <Compile Include="Converters\GuidToBrushConverter.cs" />
+    <Compile Include="Converters\OffsetCanvasPositionConverter.cs" />
+    <Compile Include="Views\Controls\GraphLineViewModel.cs" />
     <Compile Include="Views\Controls\LineChartControl.xaml.cs">
       <DependentUpon>LineChartControl.xaml</DependentUpon>
     </Compile>

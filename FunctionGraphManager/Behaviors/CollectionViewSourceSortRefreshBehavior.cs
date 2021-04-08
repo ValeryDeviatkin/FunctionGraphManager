@@ -1,10 +1,12 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Microsoft.Xaml.Behaviors;
 using ViewModels.Graph;
+using Wpf.Tools.Helpers;
 
 namespace FunctionGraphManager.Behaviors
 {
@@ -29,13 +31,20 @@ namespace FunctionGraphManager.Behaviors
 
         private void ItemsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Reset)
+            try
             {
-                _items.CollectionChanged -= ItemsOnCollectionChanged;
-                ViewSource.SortDescriptions.Clear();
-                ViewSource.SortDescriptions.Add(new SortDescription {PropertyName = nameof(GraphPointViewModel.X)});
-                ViewSource.View?.Refresh();
-                _items.CollectionChanged += ItemsOnCollectionChanged;
+                if (e.Action == NotifyCollectionChangedAction.Reset)
+                {
+                    _items.CollectionChanged -= ItemsOnCollectionChanged;
+                    ViewSource.SortDescriptions.Clear();
+                    ViewSource.SortDescriptions.Add(new SortDescription {PropertyName = nameof(GraphPointViewModel.X)});
+                    ViewSource.View?.Refresh();
+                    _items.CollectionChanged += ItemsOnCollectionChanged;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.LogCriticalException(ex);
             }
         }
 

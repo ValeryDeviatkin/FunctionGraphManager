@@ -13,7 +13,6 @@
             <system:Double x:Key = "Spacing">10</system:Double>
             <Brush x:Key = "BlackBrush">Black</Brush>
             <Brush x:Key = "GrayBrush">Gray</Brush>
-            <Brush x:Key = "WhiteBrush">WhiteSmoke</Brush>
 
             <Thickness x:Key = "ControlPadding"
                        Left = "5"
@@ -95,8 +94,6 @@
             </Style>
 
             <Style TargetType = "DataGrid">
-                <Setter Property = "Background"
-                        Value = "Transparent" />
                 <Setter Property = "BorderThickness"
                         Value = "{StaticResource BorderThickness}" />
                 <Setter Property = "BorderBrush"
