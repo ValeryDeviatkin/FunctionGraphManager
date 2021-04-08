@@ -4,7 +4,6 @@
              xmlns:mc = "http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d = "http://schemas.microsoft.com/expression/blend/2008"
              xmlns:main = "clr-namespace:ViewModels.Main;assembly=ViewModels"
-             xmlns:controls = "clr-namespace:FunctionGraphManager.Views.Controls"
              xmlns:regions = "clr-namespace:FunctionGraphManager.Views.Regions"
              mc:Ignorable = "d"
              x:Name = "Root">
@@ -22,12 +21,13 @@
         </Grid.Margin>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width = "2*" />
+            <ColumnDefinition
+                Width = "{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=ActualHeight, Mode=OneWay}" />
             <ColumnDefinition Width = "{StaticResource GridSpacing}" />
             <ColumnDefinition Width = "*" />
         </Grid.ColumnDefinitions>
 
-        <controls:GraphControl Grid.Column = "0" />
+        <regions:GraphRegion Grid.Column = "0" />
 
         <Grid Grid.Column = "2">
             <Grid.RowDefinitions>

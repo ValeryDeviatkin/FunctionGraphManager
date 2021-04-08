@@ -1,8 +1,8 @@
 ﻿namespace FunctionGraphManager.Views.Controls
 {
-    public partial class GraphControl
+    public partial class LineChartControl
     {
-        public GraphControl()
+        public LineChartControl()
         {
             InitializeComponent();
         }

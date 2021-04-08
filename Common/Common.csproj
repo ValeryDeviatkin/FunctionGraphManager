@@ -56,9 +56,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalConstants.cs" />
+    <Compile Include="Helpers\RangeValueHelper.cs" />
     <Compile Include="Interfaces\IAppLifecycleService.cs" />
     <Compile Include="Interfaces\IClientAppManager.cs" />
     <Compile Include="Interfaces\IModuleInitializer.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

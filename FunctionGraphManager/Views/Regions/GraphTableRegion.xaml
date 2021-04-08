@@ -5,12 +5,20 @@
              xmlns:d = "http://schemas.microsoft.com/expression/blend/2008"
              xmlns:graph = "clr-namespace:ViewModels.Graph;assembly=ViewModels"
              xmlns:xctk = "http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:b = "http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors = "clr-namespace:FunctionGraphManager.Behaviors"
              mc:Ignorable = "d"
              x:Name = "Root">
 
     <d:Control.DataContext>
         <graph:GraphViewModel />
     </d:Control.DataContext>
+
+    <Control.Resources>
+        <CollectionViewSource x:Key = "PointViewSource"
+                              Source = "{Binding Points, Mode=OneTime}"
+                              IsLiveSortingRequested = "True" />
+    </Control.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -32,7 +40,7 @@
         </TextBox>
 
         <DataGrid Grid.Row = "1"
-                  ItemsSource = "{Binding Points}"
+                  ItemsSource = "{Binding Source={StaticResource PointViewSource}, Mode=OneTime}"
                   AutoGenerateColumns = "False"
                   CanUserAddRows = "False"
                   CanUserDeleteRows = "False"
@@ -43,6 +51,9 @@
                   RowHeaderWidth = "0"
                   SelectionMode = "Single"
                   SelectedItem = "{Binding SelectedPoint, Mode=TwoWay}">
+            <b:Interaction.Behaviors>
+                <behaviors:CollectionViewSourceSortRefreshBehavior ViewSource = "{StaticResource PointViewSource}" />
+            </b:Interaction.Behaviors>
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header = "X"
                                         Width = "*">

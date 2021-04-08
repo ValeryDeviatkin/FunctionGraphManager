@@ -25,7 +25,15 @@ namespace ViewModels.Main
         public GraphViewModel SelectedGraph
         {
             get => _propertyName;
-            set => SetProperty(ref _propertyName, value);
+            set => SetProperty(ref _propertyName, value, null, OnSelectedGraphChanging);
+        }
+
+        private void OnSelectedGraphChanging()
+        {
+            if (SelectedGraph != null)
+            {
+                SelectedGraph.SelectedPoint = null;
+            }
         }
 
         private GraphViewModel _propertyName;

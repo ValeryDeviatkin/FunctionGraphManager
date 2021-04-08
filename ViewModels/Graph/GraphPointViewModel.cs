@@ -1,4 +1,6 @@
-﻿using Wpf.Tools.Base;
+﻿using Common;
+using Common.Helpers;
+using Wpf.Tools.Base;
 
 namespace ViewModels.Graph
 {
@@ -9,7 +11,7 @@ namespace ViewModels.Graph
         public double X
         {
             get => _x;
-            set => SetProperty(ref _x, value);
+            set => SetProperty(ref _x, RangeValueHelper.GetInRange(value, GlobalConstants.MinX, GlobalConstants.MaxX));
         }
 
         private double _x;
@@ -21,7 +23,7 @@ namespace ViewModels.Graph
         public double Y
         {
             get => _y;
-            set => SetProperty(ref _y, value);
+            set => SetProperty(ref _y, RangeValueHelper.GetInRange(value, GlobalConstants.MinY, GlobalConstants.MaxY));
         }
 
         private double _y;

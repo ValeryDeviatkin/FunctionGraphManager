@@ -22,9 +22,9 @@
     <ListBox ItemsSource = "{Binding Source={StaticResource GraphViewSource}, Mode=OneTime}"
              SelectedItem = "{Binding SelectedGraph, Mode=TwoWay}"
              Background = "Transparent"
-             AlternationCount = "{Binding Graphs.Count,Mode=OneWay}"
              MaxWidth = "{Binding ElementName=Root, Path=ActualWidth, Mode=OneWay}"
-             ScrollViewer.HorizontalScrollBarVisibility = "Disabled">
+             ScrollViewer.HorizontalScrollBarVisibility = "Disabled"
+             Padding = "{StaticResource BorderThickness}">
         <ListBox.ItemsPanel>
             <ItemsPanelTemplate>
                 <UniformGrid Columns = "2" />
@@ -49,8 +49,7 @@
                     </Setter.Value>
                 </Setter>
                 <Setter Property = "Background"
-                        Value = "{Binding RelativeSource={RelativeSource Self},
-                    Path=(ItemsControl.AlternationIndex), Converter={converters:IntToBrushConverter}}" />
+                        Value = "{Binding Id, Converter={converters:GuidToBrushConverter}}" />
             </Style>
         </ListBox.ItemContainerStyle>
         <ListBox.ItemTemplate>

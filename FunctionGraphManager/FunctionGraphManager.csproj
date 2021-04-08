@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.31\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -82,9 +85,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\IntToBrushConverter.cs" />
-    <Compile Include="Views\Controls\GraphControl.xaml.cs">
-      <DependentUpon>GraphControl.xaml</DependentUpon>
+    <Compile Include="Behaviors\CanvasDragNDropBehavior.cs" />
+    <Compile Include="Behaviors\CollectionViewSourceSortRefreshBehavior.cs" />
+    <Compile Include="Converters\GuidToBrushConverter.cs" />
+    <Compile Include="Views\Controls\LineChartControl.xaml.cs">
+      <DependentUpon>LineChartControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regions\GraphRegion.xaml.cs">
+      <DependentUpon>GraphRegion.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Regions\CommandRegion.xaml.cs">
       <DependentUpon>CommandRegion.xaml</DependentUpon>
@@ -98,7 +106,11 @@
     <Compile Include="Views\Regions\MainRegion.xaml.cs">
       <DependentUpon>MainRegion.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\Controls\GraphControl.xaml">
+    <Page Include="Views\Controls\LineChartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regions\GraphRegion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
